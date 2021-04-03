@@ -3,3 +3,22 @@
     <h1>This is an about page</h1>
   </div>
 </template>
+
+<script>
+export default {
+  data: () => {
+    test: "Hello";
+  },
+  methods: {
+    /**
+     * @NOTE - Testing notes here as well
+     */
+    test() {
+      console.log("Hello world");
+    },
+  },
+};
+</script>
+
+<style>
+</style>

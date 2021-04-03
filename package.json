@@ -1,10 +1,14 @@
 {
-  "name": "encode-test",
+  "name": "spellbook-test",
   "version": "0.1.0",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build"
+    "build": "vue-cli-service build",
+    "spellbook": "node ./spellbook/bin/index.js"
+  },
+  "bin": {
+    "spellbook": "./spellbook/bin/index.js"
   },
   "dependencies": {
     "core-js": "^3.6.5",

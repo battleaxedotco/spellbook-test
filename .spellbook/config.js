@@ -1,12 +1,12 @@
-# spellbook sandbox
+/**
+ * This is the modern standard for config files used by Vue, Quasar, etc.
+ *
+ * Ideally bombino would have this same standard, but ironically spellbook could
+ * replace bombino specifically because it's extensible whereas bombino is not.
+ *
+ * Create new files in this folder and invoke them in spell.callbacks like below
+ */
 
-Configurable, modular, extensible version of `bombino-commands` for easy CLI commands and interfaces:
-
-![](https://thumbs.gfycat.com/ScaryClumsyCrownofthornsstarfish-size_restricted.gif)
-
-Spellbook allows custom animation, prompts, messages, commands, functions and more via use of local config files relative to `./.spellbook/config.js`:
-
-```js
 module.exports = {
   spinner: {
     timeout: 1000,
@@ -58,7 +58,28 @@ module.exports = {
         phrase: "Become the Lord of Time",
         frame: "⏳",
       },
+      // {
+      //   phrase: "LEVEL UP",
+      //   frame: "🎲",
+      // },
+      // {
+      //   phrase: " Here comes the Sun",
+      //   frame: "☀️",
+      // },
     ],
+  },
+  log: {
+    root: "./src/",
+    options: {
+      includeVersion: true,
+      includeTimestamp: true,
+      header: "./.spellbook/header.md",
+      path: "./SPELLBOOK.md",
+      gitignore: false,
+      omittedTags: ["author", "return", "param", "function", "see"],
+      tagPriority: ["NOTE", "TODO", "UPDATE", "ERROR"],
+      filePriority: [/App/i, "Home", /about/],
+    },
   },
   spells: [
     {
@@ -94,4 +115,3 @@ module.exports = {
     },
   },
 };
-```
