@@ -63,7 +63,6 @@ module.exports = {
   spells: [
     {
       name: "🤘 Embrace forbidden knowledge",
-      value: "LOG",
       /**
        * @param {Object} cfg - The config object / this file
        * This is done so that options determined here can bounce into your standalone functions
@@ -74,7 +73,6 @@ module.exports = {
     },
     {
       name: "🎲 Test your wits",
-      value: "ROLL",
       callback: function(cfg) {
         console.log("");
         console.log("");
@@ -86,7 +84,6 @@ module.exports = {
   cancel: {
     prompt: {
       name: "🗙",
-      value: "CANCEL",
     },
     callback() {
       console.log("🙏  You too");

@@ -1,5 +1,11 @@
 #!/usr/bin/env node
 
+/**
+ * Deepmerging isn't working. Assigning default config results in overwritten functions of local
+ * spells, need to potentially manually parse these.
+ */
+
+const deepMerge = require("deepmerge");
 const path = require("path");
 const fs = require("fs");
 const inquirer = require("inquirer");
@@ -30,8 +36,42 @@ async function getConfig() {
   );
   if (hasLocalConfig) {
     let LOCAL_CONFIG = require(`${path.resolve("./")}/.spellbook/config.js`);
-    return LOCAL_CONFIG;
-  } else return DEFAULT_CONFIG;
+
+    //
+    // Should sanitize config in case it's missing required values
+    // let MAIN_CONFIG = deepMerge(DEFAULT_CONFIG, LOCAL_CONFIG, {
+    //   arrayMerge: (destinationArray, sourceArray, options) => sourceArray,
+    // });
+    let MAIN_CONFIG = LOCAL_CONFIG;
+    UTILS.makeFile(
+      `${path.resolve("./")}/.spellbook/config-template.json`,
+      JSON.stringify(MAIN_CONFIG)
+    );
+
+    return MAIN_CONFIG;
+  } else {
+    // Create a file and folder relative to this project
+    UTILS.makeFolder(`${path.resolve("./")}/.spellbook`);
+
+    let templateContents = await UTILS.readFile(
+      `${path.resolve("./")}/spellbook/.spellbook/config.js`,
+      false
+    );
+    UTILS.makeFile(
+      `${path.resolve("./")}/spellbook/.spellbook/config.json`,
+      JSON.stringify({ template: templateContents })
+    );
+    let stringContents = await UTILS.readFile(
+      `${path.resolve("./")}/spellbook/.spellbook/config.json`,
+      false
+    );
+    UTILS.makeFile(
+      `${path.resolve("./")}/.spellbook/config.js`,
+      JSON.parse(stringContents).template
+    );
+
+    return DEFAULT_CONFIG;
+  }
 }
 
 /**

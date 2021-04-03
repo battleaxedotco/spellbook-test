@@ -95,20 +95,20 @@ module.exports = {
     },
     {
       name: "🎲 Test your wits",
-      value: "ROLL",
       callback: function(cfg) {
+        const time = require("./getTime");
+        let timestamp = time.getTimestamp();
+        let now = time.getDate();
         console.log("");
         console.log("");
-        console.log("This function is being called from within a config file");
+        console.log(`${timestamp}`);
+        console.log(now);
         console.log("");
       },
     },
   ],
   cancel: {
-    prompt: {
-      name: "🗙",
-      value: "CANCEL",
-    },
+    prompt: "🗙",
     callback() {
       console.log("🙏  You too");
       console.log("");
